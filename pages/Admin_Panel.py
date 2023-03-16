@@ -2,7 +2,7 @@ import os
 import requests
 import streamlit as st
 
-BASE_URL = os.getenv("API_URL")
+BASE_URL = "https://school.deta.dev/"
 
 st.header("Admin Panel")
 
