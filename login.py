@@ -1,8 +1,5 @@
-import os
 import requests
 import streamlit as st
-
-BASE_URL = "https://school.deta.dev/"
 
 st.session_state["LOGGEDIN"] = None
 st.session_state["DETAILS"] = None
@@ -25,7 +22,7 @@ if st.session_state["LOGGEDIN"] == None:
         if pascode and USENAME:
             with st.spinner("Logging in..."):
                 logcheck = requests.get(
-                    f"{BASE_URL}/data/check/user?username={USENAME}&password={pascode}"
+                    f"https://school.deta.dev/data/check/user?username={USENAME}&password={pascode}"
                 )
                 st.session_state["LOGGEDIN"] = logcheck.json()["user"]
                 st.session_state["DETAILS"] = {
@@ -57,7 +54,7 @@ if st.session_state["LOGGEDIN"] == None:
                     with st.spinner("Creating account..."):
                         uname = requests.get("https://apis.kahoot.it")
                         usa = requests.post(
-                            f"{BASE_URL}/data/create/user?username={uname.json()['name']}&password={pas}&email={em}"
+                            f"https://school.deta.dev/data/create/user?username={uname.json()['name']}&password={pas}&email={em}"
                         )
                         st.success("Acount created!")
                         with st.container():

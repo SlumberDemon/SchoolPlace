@@ -1,4 +1,3 @@
-import os
 import random
 import textwrap
 import requests
@@ -9,10 +8,9 @@ from PIL import Image, ImageDraw, ImageFont
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
 
-BASE_URL = "https://school.deta.dev/"
-
-
-st.set_page_config(page_title="SchoolPlace", page_icon=f"{BASE_URL}/cdn/hat.ico")
+st.set_page_config(
+    page_title="SchoolPlace", page_icon=f"https://school.deta.dev/cdn/hat.ico"
+)
 
 with open("styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
@@ -73,13 +71,15 @@ if st.session_state["LOGGEDIN"] == True:
         st.write("Receive help or help others")
         st.write("ㅤㅤㅤ\nㅤㅤㅤ")
         with st.spinner("Loading..."):
-            by = requests.get(f"{BASE_URL}/data/wall")
+            by = requests.get(f"https://school.deta.dev/data/wall")
             data = by.json()
             count = 1
             img = 1
             for i in data:
                 with st.container():
-                    im = Image.open(urlopen(f"{BASE_URL}/cdn/wall_smol.png"))
+                    im = Image.open(
+                        urlopen(f"https://school.deta.dev/cdn/wall_smol.png")
+                    )
                     d = ImageDraw.Draw(im)
                     d.text((20, 20), f"{i['title'][0]}", "black", smol_font.title)
                     d.text((20, 65), f"{i['info']['user']}", "grey", smol_font.user)
@@ -93,7 +93,9 @@ if st.session_state["LOGGEDIN"] == True:
                         )
                     if wall:
                         with st.container():
-                            im = Image.open(urlopen(f"{BASE_URL}/cdn/wall_big.png"))
+                            im = Image.open(
+                                urlopen(f"https://school.deta.dev/cdn/wall_big.png")
+                            )
                             d = ImageDraw.Draw(im)
                             d.text(
                                 (20, 30), f"{i['title'][0]}", "black", big_font.title
@@ -124,7 +126,7 @@ if st.session_state["LOGGEDIN"] == True:
                         if report:
                             try:
                                 ro = requests.patch(
-                                    f"{BASE_URL}/data/update/wall?value=reported&state=True&id={i['key']}"
+                                    f"https://school.deta.dev/data/update/wall?value=reported&state=True&id={i['key']}"
                                 )
                                 ro.close()
                                 st.success("Reported")
@@ -162,7 +164,7 @@ if st.session_state["LOGGEDIN"] == True:
                 ti = date.strftime("%x | %X")
                 ta = ", ".join(str(x).replace("#", "") for x in tags)
                 r = requests.post(
-                    f"{BASE_URL}/data/create/wall?title={title}&content={content}&user={st.session_state['DETAILS']['username']}&time={ti}&tags={ta}"
+                    f"https://school.deta.dev/data/create/wall?title={title}&content={content}&user={st.session_state['DETAILS']['username']}&time={ti}&tags={ta}"
                 )
                 st.success(f"Posted!")
             except:
