@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
 
-BASE_URL = os.getenv("API_URL")
+BASE_URL = "https://school.deta.dev/"
 
 
 st.set_page_config(page_title="SchoolPlace", page_icon=f"{BASE_URL}/cdn/hat.ico")
