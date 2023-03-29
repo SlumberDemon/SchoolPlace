@@ -17,7 +17,7 @@ if st.session_state["LOGGEDIN"] == None:
     with l1:
         st.header("Login")
         USENAME = st.text_input("Username")
-        pascode = st.text_input("Passowrd")
+        pascode = st.text_input("Password")
 
         if pascode and USENAME:
             with st.spinner("Logging in..."):
